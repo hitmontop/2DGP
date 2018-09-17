@@ -3,12 +3,7 @@ open_canvas()
 
 character = load_image('animation_sheet.png')
 
-def move_to_1():
-    pass
-
-def move_to_2():
-    x, y = 203, 535
-    x2, y2 = 132, 243
+def move_p1_to_p2(x, y, x2, y2):
 
     frame = 0
     dir = x2-x
@@ -28,38 +23,11 @@ def move_to_2():
         frame = (frame + 1) % 8
         x += dx
         y += dy
-
-
         delay(0.01)
 
-def move_to_3():
-    pass
-def move_to_4():
-    pass
-def move_to_5():
-    pass
-def move_to_6():
-    pass
-def move_to_7():
-    pass
-def move_to_8():
-    pass
-def move_to_9():
-    pass
-def move_to_10():
-    pass
 
 def make_character_move():
-    move_to_1()
-    move_to_2()
-    move_to_3()
-    move_to_4()
-    move_to_5()
-    move_to_6()
-    move_to_7()
-    move_to_8()
-    move_to_9()
-    move_to_10()
+    move_p1_to_p2(203, 535, 132, 243)
 
 while True:
     make_character_move()
