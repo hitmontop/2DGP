@@ -21,6 +21,7 @@ def move_p1_to_p2(x, y, x2, y2):
             x += dx
             y += dy
             delay(0.05)
+            get_events()
 
     else:
         while x < x2:
@@ -31,19 +32,20 @@ def move_p1_to_p2(x, y, x2, y2):
             x += dx
             y += dy
             delay(0.05)
+            get_events()
 
 
 def make_character_move():
     move_p1_to_p2(203, 535, 132, 243)
     move_p1_to_p2(132, 243, 535, 470)
-    # move_p1_to_p2(535, 470, 477, 203)
-    # move_p1_to_p2(477, 203, 715, 136)
-    # move_p1_to_p2(715, 136, 316, 225)
-    # move_p1_to_p2(316, 225, 510, 92)
-    # move_p1_to_p2(510, 92, 692, 518)
-    # move_p1_to_p2(692, 518, 682, 336)
-    # move_p1_to_p2(682, 336, 712, 349)
-    # move_p1_to_p2(712, 349, 203, 535)
+    move_p1_to_p2(535, 470, 477, 203)
+    move_p1_to_p2(477, 203, 715, 136)
+    move_p1_to_p2(715, 136, 316, 225)
+    move_p1_to_p2(316, 225, 510, 92)
+    move_p1_to_p2(510, 92, 692, 518)
+    move_p1_to_p2(692, 518, 682, 336)
+    move_p1_to_p2(682, 336, 712, 349)
+    move_p1_to_p2(712, 349, 203, 535)
 
 
 while True:
