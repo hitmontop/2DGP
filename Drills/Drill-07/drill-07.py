@@ -43,6 +43,7 @@ def char_runs_left():
     update_canvas()
 
     get_events()
+
 size = 6
 points = [(random.randint(300, 600), random.randint(300, 600)) for i in range(size)]
 n = 1
