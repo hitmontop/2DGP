@@ -92,5 +92,5 @@ n=0
 points = [(random.randint(50, 50), random.randint(550, 550)) for i in range(size)]
 
 while True:
-    draw_curve_4_points(points[n], points[n+1],points[n-1],points[n])
-    n = (n+1) % size
+    draw_curve_4_points(points[n], points[n+1], points[n+2], points[n+3])
+    n = (n+4) % size
