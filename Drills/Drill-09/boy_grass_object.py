@@ -63,7 +63,15 @@ def handle_events():
 
 team = [Boy() for i in range(11)]
 
-balls = [BigBall() for i in range(21)]
+balls=[]
+
+for i in range(1, 21):
+    rand = random.randint(1, 2)
+    if rand == 1:
+        balls.append (BigBall())
+    else:
+        balls.append (SmallBall())
+
 
 grass = Grass()
 
