@@ -4,16 +4,20 @@ import main_state
 
 name = "PauseState"
 pause_button = None
+pause_time = 0.0
 
 class PauseButton:
     def __init__(self):
         self.image = load_image('pause.png')
+        self.frame = 0
 
     def draw(self):
-        self.image.draw(400, 300)
+        if self.frame % 5000 > 0:
+            self.image.draw(400, 300)
 
     def update(self):
         pass
+
 
 
 def enter():
@@ -41,13 +45,13 @@ def handle_events():
 
 def draw():
     clear_canvas()
+    main_state.draw()
     pause_button.draw()
     update_canvas()
 
 
 def update():
-    pass
-
+    pause_button.update()
 
 def pause():
     pass
