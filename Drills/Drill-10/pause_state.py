@@ -16,7 +16,7 @@ class PauseButton:
             self.image.draw(400, 300)
 
     def update(self):
-        pass
+        self.frame = (self.frame + 1) % 10000
 
 
 
