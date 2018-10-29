@@ -27,15 +27,14 @@ class UpState:
 
     @staticmethod
     def do(ghost):
-        if ghost.y - ghost.py >= PIXEL_PER_METER * 3:
-            ghost.add_event(SpinState)
-
         distance = game_framework.frame_time * RUN_SPEED_PPS
         ghost.y = ghost.y + distance
 
         ghost.frame = (ghost.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         ghost.image.opacify(random.randint(0, 100)/100)
 
+        if ghost.y - ghost.py >= PIXEL_PER_METER * 3:
+            ghost.add_event(SpinState)
 
 
     @staticmethod
@@ -46,7 +45,7 @@ class UpState:
 class SpinState:
     @staticmethod
     def enter(ghost):
-        pass
+        print("Spin enter")
 
     @staticmethod
     def exit(ghost):
@@ -54,7 +53,7 @@ class SpinState:
 
     @staticmethod
     def do(ghost):
-        pass
+        print("Spin do")
 
     @staticmethod
     def draw(ghost):
@@ -82,9 +81,9 @@ class Ghost:
         self.cur_state.do(self)
         if len(self.event_que) > 0:
             event = self.event_que.pop()
-            self.cur_state.exit(self, event)
+            self.cur_state.exit(self)
             self.cur_state = event
-            self.cur_state.enter(self, event)
+            self.cur_state.enter(self)
 
     def draw(self):
         self.cur_state.draw(self)
