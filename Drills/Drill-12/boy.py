@@ -94,6 +94,7 @@ class RunState:
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time)%8
 
+
         distance = game_framework.frame_time * boy.velocity
         boy.x = boy.x + distance
         boy.x = clamp(25, boy.x, 1600 - 25)

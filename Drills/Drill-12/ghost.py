@@ -1,8 +1,9 @@
 from pico2d import*
 import game_framework
 import random
+from math import*
 
-# Boy Run Speed
+# Ghost Run Speed
 # fill expressions correctly
 PIXEL_PER_METER = (10.0 / 0.3)
 RUN_SPEED_KMPH = 20.0
@@ -10,8 +11,9 @@ RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM/ 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-# Boy Action Speed
-# fill expressions correctly
+
+
+# Ghost Action Speed
 TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
@@ -19,7 +21,7 @@ FRAMES_PER_ACTION = 8
 class UpState:
     @staticmethod
     def enter(ghost):
-        print("UpState enter")
+        pass
 
     @staticmethod
     def exit(ghost):
@@ -45,7 +47,7 @@ class UpState:
 class SpinState:
     @staticmethod
     def enter(ghost):
-        print("Spin enter")
+        pass
 
     @staticmethod
     def exit(ghost):
@@ -53,11 +55,19 @@ class SpinState:
 
     @staticmethod
     def do(ghost):
-        print("Spin do")
+        ghost.x = ghost.px + cos(ghost.degree) * PIXEL_PER_METER * 3
+        ghost.y = ghost.py + sin(ghost.degree) * PIXEL_PER_METER * 3
+
+        ghost.image.opacify(random.randint(0, 100) / 100)
+
+        ghost.degree += pi*4 *game_framework.frame_time
+
+
+
 
     @staticmethod
     def draw(ghost):
-        pass
+        ghost.image.clip_draw(int(ghost.frame) * 100, 300, 100, 100, ghost.x, ghost.y)
 
 
 
@@ -66,6 +76,7 @@ class Ghost:
     def __init__(self, x, y):
         self.px, self.py = x, y
         self.x, self.y = x, y
+        self.degree = pi/2
         self.image = load_image('animation_sheet.png')
         self.frame = 0
 
