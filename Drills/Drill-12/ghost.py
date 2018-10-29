@@ -1,4 +1,6 @@
 from pico2d import*
+import game_framework
+import random
 
 # Boy Run Speed
 # fill expressions correctly
@@ -25,12 +27,14 @@ class UpState:
 
     @staticmethod
     def do(ghost):
-        print("UpState do")
+        ghost.frame = (ghost.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        ghost.image.opacify(random.randint(0, 100)/100)
+
+
 
     @staticmethod
     def draw(ghost):
-        pass
-        #ghost.image.clip_draw(int(ghost.frame) * 100, 300, 100, 100, ghost.x, ghost.y)
+        ghost.image.clip_draw(int(ghost.frame) * 100, 300, 100, 100, ghost.x, ghost.y)
 
 
 class SpinState:
@@ -58,6 +62,7 @@ class Ghost:
         self.px, self.py = x, y
         self.x, self.y = x, y
         self.image = load_image('animation_sheet.png')
+        self.frame = 0
 
         self.event_que = []
         self.cur_state = UpState
