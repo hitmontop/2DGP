@@ -2,16 +2,19 @@ import game_framework
 from pico2d import *
 from ball import Ball
 from ghost import Ghost
+from math import*
 
 import game_world
 
+ghost = Ghost
+
 # Boy Run Speed
 # fill expressions correctly
-PIXEL_PER_METER =  (10.0 / 0.3)
-RUN_SPEED_KMPH =  20.0
-RUN_SPEED_MPM =  (RUN_SPEED_KMPH * 1000.0 / 60.0)
+PIXEL_PER_METER = (10.0 / 0.3)
+RUN_SPEED_KMPH = 20.0
+RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM/ 60.0)
-RUN_SPEED_PPS =  (RUN_SPEED_MPS * PIXEL_PER_METER)
+RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # Boy Action Speed
 # fill expressions correctly
@@ -58,10 +61,8 @@ class IdleState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        if get_time() - boy.init_time >= 3:
+        if get_time() - boy.init_time >= 10:
             boy.add_event(SLEEP_TIMER)
-            ghost = Ghost(boy.x, boy.y)
-            game_world.add_object(ghost, 1)
 
     @staticmethod
     def draw(boy):
@@ -112,10 +113,14 @@ class SleepState:
     @staticmethod
     def enter(boy, event):
         boy.frame = 0
+        obj = Ghost(boy.x, boy.y)
+        boy.ghost.append(obj)
+        game_world.add_object(obj, 1)
 
     @staticmethod
     def exit(boy, event):
-        pass
+        obj = boy.ghost.pop()
+        game_world.remove_object(obj)
 
     @staticmethod
     def do(boy):
@@ -153,6 +158,7 @@ class Boy:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.init_time
+        self.ghost=[]
 
 
     def fire_ball(self):
