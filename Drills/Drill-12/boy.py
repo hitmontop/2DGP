@@ -1,6 +1,7 @@
 import game_framework
 from pico2d import *
 from ball import Ball
+from ghost import Ghost
 
 import game_world
 
@@ -57,9 +58,10 @@ class IdleState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        print("init_timer = %f" % ( boy.init_time ) )
-        if get_time() - boy.init_time >= 10:
+        if get_time() - boy.init_time >= 3:
             boy.add_event(SLEEP_TIMER)
+            ghost = Ghost(boy.x, boy.y)
+            game_world.add_object(ghost, 1)
 
     @staticmethod
     def draw(boy):
