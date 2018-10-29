@@ -27,6 +27,12 @@ class UpState:
 
     @staticmethod
     def do(ghost):
+        if ghost.y - ghost.py >= PIXEL_PER_METER * 3:
+            ghost.add_event(SpinState)
+
+        distance = game_framework.frame_time * RUN_SPEED_PPS
+        ghost.y = ghost.y + distance
+
         ghost.frame = (ghost.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         ghost.image.opacify(random.randint(0, 100)/100)
 
