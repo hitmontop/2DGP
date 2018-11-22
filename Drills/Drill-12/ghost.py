@@ -31,6 +31,7 @@ class UpState:
 
         ghost.frame = (ghost.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
 
+
         ghost.image.opacify(random.randint(0, 100)/100)
 
         if ghost.y - ghost.py >= PIXEL_PER_METER * 3:
